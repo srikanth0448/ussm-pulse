@@ -1,0 +1,496 @@
+/* ─────────────────────────────────────────
+   1. OUTER PAGE SHELL
+───────────────────────────────────────── */
+.login-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2a3fa0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* ─────────────────────────────────────────
+   2. CARD  (left + right panels wrapper)
+   — uses clamp() so it fits any screen
+   without ever going out of bounds
+───────────────────────────────────────── */
+.login-page__card {
+  display: flex;
+  /* fluid: never wider than 80 vw, never taller than 90 vh */
+  width: clamp(600px, 80vw, 1100px);
+  min-height: clamp(500px, 80vh, 700px);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+}
+
+/* ─────────────────────────────────────────
+   3. LEFT PANEL  (carousel)
+───────────────────────────────────────── */
+.login-page__left {
+  flex: 1.1;
+  position: relative;
+  min-height: inherit; /* inherits the card's clamped min-height */
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────
+   4. RIGHT PANEL  (login form)
+───────────────────────────────────────── */
+.login-page__right {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 40px;
+}
+
+/* ─────────────────────────────────────────
+   5. IMAGE CAROUSEL  (left-panel internals)
+───────────────────────────────────────── */
+
+/* wrapper */
+.image-carousel {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* --- brand logo --- */
+.image-carousel__brand {
+  position: absolute;
+  top: 24px;
+  left: 28px;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* --- Bootstrap carousel wrapper --- */
+.image-carousel__bootstrap {
+  width: 100%;
+  height: 100%;
+}
+
+.image-carousel__bootstrap .carousel-inner,
+.image-carousel__bootstrap .carousel-item {
+  height: 100%;
+}
+
+/* --- background image --- */
+.image-carousel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+/* --- blue gradient overlay --- */
+.image-carousel__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 25, 80, 0.45) 0%,
+    rgba(20, 45, 130, 0.68) 50%,
+    rgba(10, 25, 80, 0.82) 100%
+  );
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* --- caption text --- */
+.image-carousel__caption.carousel-caption {
+  position: absolute;
+  bottom: 40px;
+  left: 28px;
+  right: 28px;
+  text-align: left;
+  z-index: 2;
+  padding: 0;
+}
+
+.image-carousel__heading {
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.image-carousel__body {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* --- dot indicators --- */
+.image-carousel__bootstrap .carousel-indicators {
+  bottom: 20px;
+  left: 30%;
+  justify-content: flex-start;
+  margin: 0;
+  gap: 6px;
+}
+
+.image-carousel__bootstrap .carousel-indicators [data-bs-target] {
+  width: 28px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: rgba(255, 255, 255, 1);
+  border: none;
+  transition:
+    background-color 0.3s ease,
+    width 0.3s ease;
+}
+
+.image-carousel__bootstrap .carousel-indicators .active {
+  background-color: #2a3fa0;
+  width: 36px;
+}
+
+/* --- arrow controls --- */
+.image-carousel__bootstrap .carousel-control-prev,
+.image-carousel__bootstrap .carousel-control-next {
+  width: 40px;
+  height: 40px;
+  top: 50%;
+  transform: translateY(-50%);
+  bottom: auto;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  opacity: 1;
+  transition: background 0.2s ease;
+}
+
+.image-carousel__bootstrap .carousel-control-prev {
+  left: 16px;
+}
+
+.image-carousel__bootstrap .carousel-control-next {
+  right: 16px;
+}
+
+.image-carousel__bootstrap .carousel-control-prev:hover,
+.image-carousel__bootstrap .carousel-control-next:hover {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+.image-carousel__bootstrap .carousel-control-prev-icon,
+.image-carousel__bootstrap .carousel-control-next-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ─────────────────────────────────────────
+   6. RESPONSIVE BREAKPOINTS
+───────────────────────────────────────── */
+
+/* Large desktops (1440px+) */
+@media (min-width: 1440px) {
+  .login-page__card {
+    width: 72vw;
+  }
+}
+
+/* Standard desktops / laptops (1024px – 1439px) */
+@media (max-width: 1280px) {
+  .login-page__card {
+    width: 88vw;
+    min-height: clamp(480px, 75vh, 660px);
+  }
+
+  .image-carousel__heading {
+    font-size: 2rem;
+  }
+}
+
+/* Small laptops / tablets landscape (768px – 1023px) */
+@media (max-width: 1024px) {
+  .login-page__card {
+    width: 92vw;
+    min-height: clamp(460px, 72vh, 620px);
+  }
+
+  .image-carousel__brand-name {
+    font-size: 1.6rem;
+  }
+
+  .image-carousel__brand-pulse,
+  .image-carousel__brand-divider {
+    font-size: 1.4rem;
+  }
+
+  .image-carousel__heading {
+    font-size: 1.75rem;
+  }
+
+  .image-carousel__body {
+    font-size: 0.95rem;
+  }
+
+  .login-page__right {
+    padding: 36px 28px;
+  }
+}
+
+/* Tablets portrait / large phones (max 768px) */
+@media (max-width: 768px) {
+  .login-page__card {
+    flex-direction: column;
+    width: 95vw;
+    min-height: unset;
+  }
+
+  .login-page__left {
+    min-height: 280px;
+    flex: none;
+  }
+
+  .login-page__right {
+    padding: 32px 24px;
+  }
+
+  .image-carousel__caption.carousel-caption {
+    bottom: 40px;
+  }
+
+  .image-carousel__heading {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+
+  .image-carousel__bootstrap .carousel-control-prev,
+  .image-carousel__bootstrap .carousel-control-next {
+    display: none;
+  }
+}
+
+/* -------------------- login form styles --------------------- */
+
+/* ─────────────────────────────────────────
+   7. LOGIN FORM  (right panel internals)
+───────────────────────────────────────── */
+.login-form {
+  width: 80%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* --- header --- */
+.login-form__header {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.login-form__title {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+
+.login-form__subtitle {
+  font-size: 0.95rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* --- form body --- */
+.login-form__body {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- field group --- */
+.login-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.login-form__label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+/* --- base input --- */
+.login-form__input {
+  width: 100%;
+  padding: 13px 16px;
+  font-size: 0.95rem;
+  color: #1a1a2e;
+  background: #f0f4ff;
+  border: 1.5px solid transparent;
+  border-radius: 10px;
+  outline: none;
+  box-sizing: border-box;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.login-form__input::placeholder {
+  color: #9ca3af;
+}
+
+.login-form__input:focus {
+  background: #ffffff;
+  border-color: #2a3fa0;
+  box-shadow: 0 0 0 3px rgba(42, 63, 160, 0.12);
+}
+
+/* --- password wrapper (input + eye button) --- */
+.login-form__input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* password input needs right padding so text doesn't slide under the eye */
+.login-form__input--password {
+  padding-right: 46px;
+}
+
+/* --- eye toggle button --- */
+.login-form__eye {
+  position: absolute;
+  right: 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  color: #9ca3af;
+  transition: color 0.2s ease;
+}
+
+.login-form__eye:hover {
+  color: #2a3fa0;
+}
+
+.login-form__eye svg {
+  width: 18px;
+  height: 18px;
+}
+
+/* --- submit button --- */
+.login-form__btn {
+  width: 100%;
+  padding: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  background: #22c55e;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+}
+
+.login-form__btn:hover:not(:disabled) {
+  background: #16a34a;
+  box-shadow: 0 6px 20px rgba(34, 197, 94, 0.35);
+  transform: translateY(-1px);
+}
+
+.login-form__btn:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.login-form__btn:disabled,
+.login-form__btn--loading {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+/* --- loading spinner inside button --- */
+.login-form__spinner {
+  width: 20px;
+  height: 20px;
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: inline-block;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* --- footer --- */
+.login-form__footer {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* ─────────────────────────────────────────
+   LOGIN FORM – responsive tweaks
+───────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .login-form {
+    max-width: 100%;
+    gap: 24px;
+  }
+
+  .image-carousel__brand {
+    position: absolute;
+    top: 24px;
+    left: 0px;
+  }
+  .login-form__title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #1a1a2e;
+  margin: 0;
+  letter-spacing: -0.02em;
+}
+}
+
+/* Red border on invalid input */
+.login-form__input--error {
+  border-color: #e53e3e;
+  outline-color: #e53e3e;
+}
+
+/* Error message below the field */
+.login-form__error {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #e53e3e;
+}
+.image-carousel__brand img {
+  height: 70px;
+}
