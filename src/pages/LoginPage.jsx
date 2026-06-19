@@ -1,6 +1,7 @@
 import ImageCarousel from "../components/Loginpage/ImageCarousel";
 import LoginForm from "../components/Loginpage/LoginForm";
 import "../styles/Loginpage.css";
+import PWAInstallButton from "../components/common/PWAInstallButton";
 function LoginPage() {
   return (
     <div className="login-page p-lg-5 p-0">
@@ -13,6 +14,7 @@ function LoginPage() {
         {/* Right — login form */}
         <div className=" login-page__right p-lg-3 p-0 pt-1 ">
           <LoginForm />
+          <PWAInstallButton />
         </div>
       </div>
     </div>

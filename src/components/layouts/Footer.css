@@ -4,7 +4,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 72px;
+  height: 3.5rem;
   background: #fff;
 
   display: flex;
@@ -36,12 +36,14 @@
 
   color: #8a94a6;
   transition: all 0.2s ease;
+  text-decoration: none;
 }
 
 .footer-nav__item span {
   font-size: 11px;
   font-weight: 500;
   line-height: 1;
+  text-decoration: none;
 }
 
 /* Active State */
@@ -76,18 +78,14 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
-
-  background: #24346e;
+  background: linear-gradient(135deg, #2a3fa0, #0a58ca);
   color: #fff;
-
   display: flex;
   align-items: center;
   justify-content: center;
-
   box-shadow:
     0 12px 28px rgba(36, 52, 110, 0.35),
     0 6px 14px rgba(36, 52, 110, 0.2);
-
   transition: all 0.25s ease;
   z-index: 1001;
 }
@@ -98,7 +96,6 @@
     0 16px 32px rgba(36, 52, 110, 0.45),
     0 8px 18px rgba(36, 52, 110, 0.25);
 }
-
 
 .footer-fab:active {
   transform: translateY(-1px);

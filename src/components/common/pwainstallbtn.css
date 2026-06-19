@@ -1,0 +1,53 @@
+.pwa-install-icon {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+
+  width: 52px;
+  height: 52px;
+
+  border: none;
+  border-radius: 50%;
+
+  background: #1a3691;
+  color: white;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  box-shadow: 0 8px 24px rgba(26, 54, 145, 0.25);
+
+  animation: installBounce 2.5s infinite;
+  transition: all 0.3s ease;
+  z-index: 999;
+}
+
+.pwa-install-icon:hover {
+  transform: translateY(-4px) scale(1.08);
+}
+
+@keyframes installBounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  15% {
+    transform: translateY(-8px);
+  }
+
+  30% {
+    transform: translateY(0);
+  }
+
+  45% {
+    transform: translateY(-4px);
+  }
+
+  60% {
+    transform: translateY(0);
+  }
+}

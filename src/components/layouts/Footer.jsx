@@ -1,41 +1,83 @@
-import {
-  Clock3,
-  FileText,
-  User,
-  CalendarDays,
-  Plus,
-} from "lucide-react";
+import { Clock3, FileText, User, CalendarDays, Plus,Home } from "lucide-react";
+import { NavLink,useLocation  } from "react-router-dom";
 import "./Footer.css";
 
 export default function Footer() {
+  const location = useLocation();
+  const fabPages = [
+  "/requests",
+];
+
+const showFab = fabPages.includes(location.pathname);
+
   return (
     <>
       {/* Floating Action Button */}
-      <button className="footer-fab">
-        <Plus size={26} />
-      </button>
 
+  {showFab && (
+    <NavLink to="/add" className="footer-fab" aria-label="Add">
+          <Plus size={26} />
+        </NavLink>
+
+  )}
+
+
+
+   
       {/* Bottom Navigation */}
       <footer className="footer-nav px-2">
-        <button className="footer-nav__item footer-nav__item--active">
+
+       <NavLink
+          to="/HomePage"
+          end
+          className={({ isActive }) =>
+            "footer-nav__item" + (isActive ? " footer-nav__item--active" : "")
+          }
+        >
+          <Home size={20} />
+          <span>Home</span>
+        </NavLink>
+
+        <NavLink
+          to="/attendance"
+          end
+          className={({ isActive }) =>
+            "footer-nav__item" + (isActive ? " footer-nav__item--active" : "")
+          }
+        >
           <Clock3 size={20} />
           <span>Attendance</span>
-        </button>
+        </NavLink>
 
-        <button className="footer-nav__item">
+        <NavLink
+          to="/requests"
+          className={({ isActive }) =>
+            "footer-nav__item" + (isActive ? " footer-nav__item--active" : "")
+          }
+        >
           <FileText size={20} />
           <span>Requests</span>
-        </button>
+        </NavLink>
 
-        <button className="footer-nav__item">
+        <NavLink
+          to="/leaves"
+          className={({ isActive }) =>
+            "footer-nav__item" + (isActive ? " footer-nav__item--active" : "")
+          }
+        >
           <User size={20} />
           <span>Leaves</span>
-        </button>
+        </NavLink>
 
-        <button className="footer-nav__item">
+        <NavLink
+          to="/holidays"
+          className={({ isActive }) =>
+            "footer-nav__item" + (isActive ? " footer-nav__item--active" : "")
+          }
+        >
           <CalendarDays size={20} />
           <span>Holidays</span>
-        </button>
+        </NavLink>
       </footer>
     </>
   );

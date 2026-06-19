@@ -1,5 +1,6 @@
 import axios from "axios";
-import { apiBaseUrl } from"../constants/apiBaseUrl";
+import { apiBaseUrl } from "../constants/apiBaseUrl";
+
 // Create a function to generate Axios instances with a specific base URL
 const createAxiosInstance = (baseURL) => {
   const instance = axios.create({
@@ -8,17 +9,15 @@ const createAxiosInstance = (baseURL) => {
 
   // Add a request interceptor
   instance.interceptors.request.use(
-    function (config) {
-      // Check if JWT token exists and add it to the request headers
+    (config) => {
       const token = sessionStorage.getItem("token");
       if (token) {
+        config.headers = config.headers || {};
         config.headers.Authorization = `Bearer ${token}`;
       }
       return config;
     },
-    function (error) {
-      return Promise.reject(error);
-    }
+    (error) => Promise.reject(error),
   );
 
   return instance;

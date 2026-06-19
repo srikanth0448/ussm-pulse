@@ -1,2 +1,2 @@
-export const apiBaseUrl = "http://120.138.10.167/testing/pulse/api";
+export const apiBaseUrl = "https://120.138.10.167/testing/pulse/api";
     

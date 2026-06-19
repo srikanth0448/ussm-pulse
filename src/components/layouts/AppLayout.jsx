@@ -7,7 +7,7 @@ function AppLayout() {
     <>
       <Navbar />
 
-      <main className="app-content">
+      <main className="app-content px-3">  
         <Outlet />
       </main>
 

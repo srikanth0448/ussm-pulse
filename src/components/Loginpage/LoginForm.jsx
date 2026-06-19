@@ -76,8 +76,10 @@ function LoginForm() {
       if (response && response.data && response.data.status === true) {
         sessionStorage.setItem("token", response.data.authorisation.token);
         sessionStorage.setItem("user", JSON.stringify(response.data.user));
+
+        sessionStorage.setItem("userid", response.data.user.user_id);
         login(response.data);
-        navigate("/attendance");
+        navigate("/HomePage");
         
       } else if (response && response.data && response.data.status === false) {
         setErrors((prev) => ({

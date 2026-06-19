@@ -1,9 +1,81 @@
+import { useState, useEffect } from "react";
+
+import AttendanceSummary from "../components/attendance/AttendanceSummary";
+import AttendanceHeader from "../components/attendance/AttendanceHeader";
+import AttendanceMonthPicker from "../components/attendance/AttendanceMonthPicker";
+import AttendanceTable from "../components/attendance/AttendanceTable";
+import Loader from "../components/common/Loader";
+
+
+import { attendanceService } from "../services/attendanceService";
+
 function AttendancePage() {
+  const [attendanceData, setAttendanceData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const [selectedMonth, setSelectedMonth] = useState(
+    new Date().toISOString().slice(0, 7)
+  );
+
+
+  const userId = sessionStorage.getItem("userid");
+
+
+  
+
+  const fetchAttendance = async () => {
+    try {
+      setLoading(true);
+
+      const { data } = await attendanceService.getAttendance({
+        monthYear: selectedMonth,
+        userId,
+        status: "",
+      });
+
+      console.log("Attendance API:", data);
+
+      setAttendanceData(data?.data || []);
+    } catch (error) {
+      console.log("Attendance Error:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchAttendance();
+  }, [selectedMonth]);
+
   return (
-    <div className="attendance-page">
-      <h1>Attendance Page</h1>
-      <p>This is where the attendance details will be displayed.</p>
-    </div>
+    <>
+
+      <div className="fixedtop py-2 px-3">
+
+      <AttendanceHeader />
+
+      <AttendanceMonthPicker
+        selectedMonth={selectedMonth}
+        onMonthChange={setSelectedMonth}
+      />
+
+      <AttendanceSummary
+        monthYear={selectedMonth}
+      />
+
+      </div>
+
+      <div className="datadaywise">
+
+      {loading ? (
+        <div><Loader/></div>
+      ) : (
+        <AttendanceTable
+          attendanceData={attendanceData}
+        />
+      )}
+      </div>
+    </>
   );
 }
 

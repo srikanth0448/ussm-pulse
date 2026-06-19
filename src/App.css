@@ -1,7 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap");
+
+body {
+  font-family: "Rubik", sans-serif;
+  font-size: 0.825rem;
+  font-weight: 400;
+  color: #212529;
+  line-height: 1.5;
+  background-color: #f3f6f9;
+}
+
 .app-content {
-  padding-left: 20px;
   padding-top: 80px;
-  padding-bottom: 20px;
+  padding-bottom: 60px;
 }
 
 .coming-soon-page {
