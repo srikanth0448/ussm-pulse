@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import HolidaySection from "../components/holidays/HolidaySection";
-import "../components/holidays/Holidays.css";
-import { api } from "../api/axiosClient";
+import HolidaySection from "../features/holidays/HolidaySection";
+import "../features/holidays/Holidays.css";
+import { api } from "../services/api/axiosClient";
 import { CalendarDays, ChevronDown } from "lucide-react";
 import Loader from "../components/common/Loader";
 
@@ -41,11 +41,7 @@ export default function HolidaysList() {
         <h1 className="pageheader">Holidays</h1>
 
         <div className="calender-datesection">
-          <CalendarDays
-            className="calendar-icon"
-            size={17}
-            color="#0b61df"
-          />
+          <CalendarDays className="calendar-icon" size={17} color="#0b61df" />
 
           <select
             value={selectedYear}
@@ -53,34 +49,24 @@ export default function HolidaysList() {
             className="holidays-page__select"
           >
             {holidayData?.years?.map((year) => (
-              <option
-                key={year}
-                value={year}
-              >
+              <option key={year} value={year}>
                 {year}
               </option>
             ))}
           </select>
 
-          <ChevronDown
-            className="dropdown-icon"
-            size={16}
-          />
+          <ChevronDown className="dropdown-icon" size={16} />
         </div>
       </div>
 
-      {fixedHolidays.length === 0 &&
-      optionalHolidays.length === 0 ? (
+      {fixedHolidays.length === 0 && optionalHolidays.length === 0 ? (
         <div className="no-holidays">
           No holidays available for {selectedYear}
         </div>
       ) : (
         <>
           {fixedHolidays.length > 0 && (
-            <HolidaySection
-              title="Fixed Holidays"
-              holidays={fixedHolidays}
-            />
+            <HolidaySection title="Fixed Holidays" holidays={fixedHolidays} />
           )}
 
           {optionalHolidays.length > 0 && (

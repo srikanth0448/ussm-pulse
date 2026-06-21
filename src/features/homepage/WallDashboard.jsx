@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { api } from "../../api/axiosClient";
+import { api } from "../../services/api/axiosClient";
 import Carousel from "react-bootstrap/Carousel";
 import { Link } from "react-router-dom";
 import "./WallDashboard.css";
@@ -29,14 +29,10 @@ const WallDashboard = () => {
 
   return (
     <div className="dashboard-wall">
-
       <div className="dashboard-wall-header">
         <h5>Wall Posts</h5>
 
-        <Link
-          to="/viewwallpage"
-          className="dashboard-view-all"
-        >
+        <Link to="/viewwallpage" className="dashboard-view-all">
           View All
           <ChevronRight size={15} />
         </Link>
@@ -52,54 +48,38 @@ const WallDashboard = () => {
         >
           {wall.map((item) => (
             <Carousel.Item key={item.post_id}>
-
               <div className="dashboard-card">
-
                 <div className="dashboard-image-wrap">
-
                   <img
                     src={item.images?.[0]?.images}
                     className="dashboard-image"
                     alt=""
                   />
 
-                  <span className="dashboard-badge">
-                    {item.post_type}
-                  </span>
+                  <span className="dashboard-badge">{item.post_type}</span>
 
                   <div className="dashboard-overlay">
-                    <h3>
-                      {item.employee_name}
-                    </h3>
+                    <h3>{item.employee_name}</h3>
                   </div>
-
                 </div>
 
                 <div className="dashboard-content">
-
                   <div
                     className="dashboard-desc"
                     dangerouslySetInnerHTML={{
-                      __html: item.text
+                      __html: item.text,
                     }}
                   />
 
                   <div className="dashboard-footer">
-
                     <div className="dashboard-author">
                       🏢 {item.emp_designation}
                     </div>
 
-                    <div className="dashboard-date">
-                      {item.date}
-                    </div>
-
+                    <div className="dashboard-date">{item.date}</div>
                   </div>
-
                 </div>
-
               </div>
-
             </Carousel.Item>
           ))}
         </Carousel>

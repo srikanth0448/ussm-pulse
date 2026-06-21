@@ -1,5 +1,5 @@
 import "../../styles/attendance.css";
-import { api } from "../../api/axiosClient";
+import { api } from "../../services/api/axiosClient";
 import { useEffect, useState } from "react";
 
 export default function AttendanceSummary({ monthYear }) {
@@ -10,7 +10,7 @@ export default function AttendanceSummary({ monthYear }) {
       console.log("Month Year:", monthYear);
 
       const { data } = await api.get(
-        `/emp-attendance-monthly-info?month_year=${monthYear}`
+        `/emp-attendance-monthly-info?month_year=${monthYear}`,
       );
 
       console.log("Attendance Summary API:", data);
@@ -35,8 +35,7 @@ export default function AttendanceSummary({ monthYear }) {
     <div className="attendance-summary">
       {attendanceData.map((item, index) => (
         <div key={index} className="summary-wrapper">
-
-            <div className="summary-card">
+          <div className="summary-card">
             <h4>{item.total_days || 0}</h4>
             <span>Total Days</span>
           </div>

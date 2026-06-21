@@ -1,5 +1,5 @@
 import axios from "axios";
-import { apiBaseUrl } from "../constants/apiBaseUrl";
+import { apiBaseUrl } from "../../constants/apiBaseUrl";
 
 // Create a function to generate Axios instances with a specific base URL
 const createAxiosInstance = (baseURL) => {

@@ -1,10 +1,9 @@
-import AttendanceRow from "../attendance/AttendanceRow";
+import AttendanceRow from "./AttendanceRow";
 import "../../styles/attendance.css";
 
 export default function AttendanceTable({ attendanceData = [] }) {
   return (
     <div className="attendance-table">
-
       <div className="attendance-header-row">
         <div>Date</div>
         <div>In Time</div>
@@ -14,10 +13,7 @@ export default function AttendanceTable({ attendanceData = [] }) {
       </div>
 
       {attendanceData.map((item) => (
-        <AttendanceRow
-          key={item.id}
-          item={item}
-        />
+        <AttendanceRow key={item.id} item={item} />
       ))}
     </div>
   );

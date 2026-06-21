@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "./NavBar";
-import Footer from "./Footer";
+import Navbar from "./Navbar/Navbar";
+import Footer from "./Footer/Footer";
 
 function AppLayout() {
   return (
     <>
       <Navbar />
 
-      <main className="app-content px-3">  
+      <main className="app-content px-3">
         <Outlet />
       </main>
 

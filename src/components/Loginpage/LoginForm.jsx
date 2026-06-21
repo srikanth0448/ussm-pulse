@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/Loginpage.css";
-import { api } from "../../api/axiosClient";
+import { api } from "../../services/api/axiosClient";
 import { useAuth } from "../../context/AuthContext";
-
 
 function LoginForm() {
   const [mobile, setMobile] = useState("");
@@ -18,8 +17,8 @@ function LoginForm() {
   const validate = (name, value) => {
     if (name === "mobile") {
       if (!value) return "Mobile number is required.";
-      if (!/^\d{10}$/.test(value))
-        return "Enter a valid 10-digit mobile number.";
+      // if (!/^\d{10}$/.test(value))
+      //   return "Enter a valid 10-digit mobile number.";
     }
     if (name === "password") {
       if (!value) return "Password is required.";
@@ -71,7 +70,6 @@ function LoginForm() {
         `/login?mobile=${mobile}&password=${password}`,
       );
       console.log("Response:", response.data.user);
-    
 
       if (response && response.data && response.data.status === true) {
         sessionStorage.setItem("token", response.data.authorisation.token);
@@ -80,7 +78,6 @@ function LoginForm() {
         sessionStorage.setItem("userid", response.data.user.user_id);
         login(response.data);
         navigate("/HomePage");
-        
       } else if (response && response.data && response.data.status === false) {
         setErrors((prev) => ({
           ...prev,

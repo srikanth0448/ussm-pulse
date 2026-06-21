@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 
- import { api } from "../api/axiosClient";
+import { api } from "../services/api/axiosClient";
 
-import ProfileHeadercard from "../components/profile/ProfileHeadercard";
-import CompanyDetails from "../components/profile/CompanyDetails";
-import PersonalDetails from "../components/profile/PersonalDetails";
+import ProfileHeadercard from "../features/profile/ProfileHeadercard";
+import CompanyDetails from "../features/profile/CompanyDetails";
+import PersonalDetails from "../features/profile/PersonalDetails";
 import Loader from "../components/common/Loader";
 
-import "../components/profile/Profilepage.css";
+import "../features/profile/Profilepage.css";
 
 function ProfilePage() {
   const [profileData, setProfileData] = useState(null);
 
-  const [activeTab, setActiveTab] =
-    useState("personal");
+  const [activeTab, setActiveTab] = useState("personal");
 
   useEffect(() => {
     fetchProfile();
@@ -21,73 +20,45 @@ function ProfilePage() {
 
   const fetchProfile = async () => {
     try {
-      const response = await api.get(
-        "/get-profile"
-      );
+      const response = await api.get("/get-profile");
 
-      console.log(
-        "Profile Data:",
-        response.data
-      );
+      console.log("Profile Data:", response.data);
 
       setProfileData(response.data);
     } catch (error) {
-      console.error(
-        "Profile API Error:",
-        error
-      );
+      console.error("Profile API Error:", error);
     }
   };
 
   if (!profileData) {
-    return (
-    <Loader/>
-    );
+    return <Loader />;
   }
 
   return (
     <div className="profile-page">
       <div className="profile-card">
-        <ProfileHeadercard
-          profileData={profileData}
-        />
+        <ProfileHeadercard profileData={profileData} />
 
         <div className="profile-tabs">
           <button
-            className={`tab-btn ${
-              activeTab === "personal"
-                ? "active"
-                : ""
-            }`}
-            onClick={() =>
-              setActiveTab("personal")
-            }
+            className={`tab-btn ${activeTab === "personal" ? "active" : ""}`}
+            onClick={() => setActiveTab("personal")}
           >
             Personal Details
           </button>
 
           <button
-            className={`tab-btn ${
-              activeTab === "company"
-                ? "active"
-                : ""
-            }`}
-            onClick={() =>
-              setActiveTab("company")
-            }
+            className={`tab-btn ${activeTab === "company" ? "active" : ""}`}
+            onClick={() => setActiveTab("company")}
           >
             Company Details
           </button>
         </div>
 
         {activeTab === "personal" ? (
-          <PersonalDetails
-            profileData={profileData}
-          />
+          <PersonalDetails profileData={profileData} />
         ) : (
-          <CompanyDetails
-            profileData={profileData}
-          />
+          <CompanyDetails profileData={profileData} />
         )}
       </div>
     </div>

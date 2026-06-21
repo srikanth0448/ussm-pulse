@@ -1,4 +1,4 @@
-import { api } from "../api/axiosClient";
+import { api } from "../services/api/axiosClient";
 
 export const attendanceService = {
   getAttendance: ({
@@ -9,6 +9,6 @@ export const attendanceService = {
     status = "",
   }) =>
     api.get(
-      `/emp-month-wise-attendance-report?month_year=${monthYear}&from_date=${fromDate}&to_date=${toDate}&user_id=${userId}&status=${status}`
+      `/emp-month-wise-attendance-report?month_year=${monthYear}&from_date=${fromDate}&to_date=${toDate}&user_id=${userId}&status=${status}`,
     ),
 };

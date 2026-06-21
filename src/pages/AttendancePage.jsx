@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 
-import AttendanceSummary from "../components/attendance/AttendanceSummary";
-import AttendanceHeader from "../components/attendance/AttendanceHeader";
-import AttendanceMonthPicker from "../components/attendance/AttendanceMonthPicker";
-import AttendanceTable from "../components/attendance/AttendanceTable";
+import AttendanceSummary from "../features/attendance/AttendanceSummary";
+import AttendanceHeader from "../features/attendance/AttendanceHeader";
+import AttendanceMonthPicker from "../features/attendance/AttendanceMonthPicker";
+import AttendanceTable from "../features/attendance/AttendanceTable";
 import Loader from "../components/common/Loader";
-
 
 import { attendanceService } from "../services/attendanceService";
 
@@ -14,14 +13,10 @@ function AttendancePage() {
   const [loading, setLoading] = useState(false);
 
   const [selectedMonth, setSelectedMonth] = useState(
-    new Date().toISOString().slice(0, 7)
+    new Date().toISOString().slice(0, 7),
   );
 
-
   const userId = sessionStorage.getItem("userid");
-
-
-  
 
   const fetchAttendance = async () => {
     try {
@@ -49,31 +44,25 @@ function AttendancePage() {
 
   return (
     <>
-
       <div className="fixedtop py-2 px-3">
+        <AttendanceHeader />
 
-      <AttendanceHeader />
+        <AttendanceMonthPicker
+          selectedMonth={selectedMonth}
+          onMonthChange={setSelectedMonth}
+        />
 
-      <AttendanceMonthPicker
-        selectedMonth={selectedMonth}
-        onMonthChange={setSelectedMonth}
-      />
-
-      <AttendanceSummary
-        monthYear={selectedMonth}
-      />
-
+        <AttendanceSummary monthYear={selectedMonth} />
       </div>
 
       <div className="datadaywise">
-
-      {loading ? (
-        <div><Loader/></div>
-      ) : (
-        <AttendanceTable
-          attendanceData={attendanceData}
-        />
-      )}
+        {loading ? (
+          <div>
+            <Loader />
+          </div>
+        ) : (
+          <AttendanceTable attendanceData={attendanceData} />
+        )}
       </div>
     </>
   );
