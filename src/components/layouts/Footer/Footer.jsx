@@ -1,33 +1,26 @@
-import { Clock3, FileText, User, CalendarDays, Plus,Home } from "lucide-react";
-import { NavLink,useLocation  } from "react-router-dom";
+import { Clock3, FileText, User, CalendarDays, Plus, Home } from "lucide-react";
+import { NavLink, useLocation } from "react-router-dom";
 import "./Footer.css";
 
 export default function Footer() {
   const location = useLocation();
-  const fabPages = [
-  "/requests",
-];
+  const fabPages = ["/requests"];
 
-const showFab = fabPages.includes(location.pathname);
+  const showFab = fabPages.includes(location.pathname);
 
   return (
     <>
       {/* Floating Action Button */}
 
-  {showFab && (
-    <NavLink to="/add" className="footer-fab" aria-label="Add">
+      {/* {showFab && (
+        <NavLink to="/add" className="footer-fab" aria-label="Add">
           <Plus size={26} />
         </NavLink>
+      )} */}
 
-  )}
-
-
-
-   
       {/* Bottom Navigation */}
       <footer className="footer-nav px-2">
-
-       <NavLink
+        <NavLink
           to="/HomePage"
           end
           className={({ isActive }) =>
